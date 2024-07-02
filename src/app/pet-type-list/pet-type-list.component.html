@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <h2>Pet Types</h2>
+      </div>
+    
+    </div>
+  
+    
+  <div class="row mb-3 align-items-center">
+    <div class="col-md-6">
+      <input type="text" class="form-control" placeholder="Search pet types..." [(ngModel)]="searchTerm" (ngModelChange)="filterPetTypes()">
+    </div>
+    <div class="col-md-6 text-right">
+        <button class="btn btn-primary mr-2"  (click)="goToNewPet()">Add New Pet Type</button>
+      <a routerLink="/appointments" class="btn btn-secondary">Back to Appointment</a>
+    </div>
+  </div>
+  
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let petType of filteredPetTypes">
+            <td>{{ petType.name }}</td>
+            <td>
+              <div class="btn-group" role="group" aria-label="Pet Type Actions">
+                <a routerLink="/pet-types/{{ petType.id }}/edit" class="btn btn-sm btn-primary">Edit</a>
+                <button class="btn btn-sm btn-danger ml-2" (click)="deletePetType(petType.id)">Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="filteredPetTypes.length === 0">
+            <td colspan="2" class="text-center">No pet types found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

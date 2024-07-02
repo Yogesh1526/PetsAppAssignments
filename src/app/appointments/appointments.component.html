@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <h2>Upcoming Appointments</h2>
+      </div>
+    </div>
+  
+   
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="Search appointments..." [(ngModel)]="searchTerm" (ngModelChange)="filterAppointments()">
+      </div>
+      <div class="col-md-6 text-right">
+        <div class="step-buttons">
+          <div class="step-button">
+            <span class="step-number">Step 1</span>
+            <button class="btn btn-primary ml-2" routerLink="/pet-types-list">Pet Types</button>
+
+          </div>
+          <div class="step-button">
+            <span class="step-number">Step 2</span>
+            <button class="btn btn-primary ml-2" routerLink="/breed-list">Pet Breed</button>
+
+          </div>
+          <div class="step-button">
+            <span class="step-number">Step 3</span>
+            <button class="btn btn-primary ml-2" routerLink="/owners">Owners</button>
+          </div>
+          <div class="step-button">
+            <span class="step-number">Step 4</span>
+            <button class="btn btn-primary ml-2" routerLink="/pets">Pets</button>
+          </div>
+          <div class="step-button">
+            <span class="step-number">Step 5</span>
+            <button class="btn btn-primary mr-2" routerLink="/appointments/new">New Appointment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Pet's Name</th>
+            <th>Owner's Name</th>
+            <th>Date</th>
+            <th>Reason</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let appointment of filteredAppointments">
+            <td>{{ appointment.pet.name }}</td>
+            <td>{{ appointment.petOwner.name }}</td>
+            <td>{{ appointment.appointmentDate | date:'yyyy-MM-dd h:mm a' }}</td>
+            <td>{{ appointment.reason }}</td>
+            <td>
+              <div class="btn-group" role="group" aria-label="Appointment Actions">
+                <a routerLink="/appointments/{{ appointment.id }}/edit" class="btn btn-sm btn-primary">Edit</a>
+                <button class="btn btn-sm btn-danger ml-2" (click)="deleteAppointment(appointment.id)">Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="filteredAppointments.length === 0">
+            <td colspan="5" class="text-center">No appointments found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

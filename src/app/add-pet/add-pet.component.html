@@ -1,0 +1,54 @@
+<div class="container">
+    <h2>Add New Pet</h2>
+    <form [formGroup]="newForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name">
+        <div *ngIf="newForm.get('name')?.invalid && (newForm.get('name')?.dirty || newForm.get('name')?.touched)"
+          class="invalid-feedback">
+          <div *ngIf="newForm.get('name')?.errors?.['required']">
+            Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="petTypeId">Pet Type</label>
+        <select id="petTypeId" class="form-control" formControlName="petTypeId" >
+          <option *ngFor="let type of petTypes" [value]="type.id">{{ type.name }}</option>
+        </select>
+        <div *ngIf="newForm.get('petTypeId')?.invalid && (newForm.get('petTypeId')?.dirty || newForm.get('petTypeId')?.touched)"
+          class="invalid-feedback">
+          <div *ngIf="newForm.get('petTypeId')?.errors?.['required']">
+            Pet Type is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="petBreedId">Pet Breed</label>
+        <select id="petBreedId" class="form-control" formControlName="petBreedId">
+          <option *ngFor="let breed of petBreeds" [value]="breed.id">{{ breed.name }}</option>
+        </select>
+        <div *ngIf="newForm.get('petBreedId')?.invalid && (newForm.get('petBreedId')?.dirty || newForm.get('petBreedId')?.touched)"
+          class="invalid-feedback">
+          <div *ngIf="newForm.get('petBreedId')?.errors?.['required']">
+            Pet Breed is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="ownerId">Owner</label>
+        <select id="ownerId" class="form-control" formControlName="ownerId">
+          <option *ngFor="let owner of owners" [value]="owner.id">{{ owner.name }}</option>
+        </select>
+        <div *ngIf="newForm.get('ownerId')?.invalid && (newForm.get('ownerId')?.dirty || newForm.get('ownerId')?.touched)"
+          class="invalid-feedback">
+          <div *ngIf="newForm.get('ownerId')?.errors?.['required']">
+            Owner is required.
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mr-2" [disabled]="newForm.invalid">Save</button>
+      <a routerLink="/pets" class="btn btn-outline-secondary">Cancel</a>
+    </form>
+  </div>
+  

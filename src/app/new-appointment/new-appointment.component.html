@@ -1,0 +1,54 @@
+<div class="container">
+    <h2>Add New Appointment</h2>
+    <form [formGroup]="newForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="ownerId">Owner</label>
+        <select id="ownerId" class="form-control" formControlName="ownerId" (change)="onChangeOwner()">
+          <option value="">Select Owner</option>
+          <option *ngFor="let owner of owners" [value]="owner.id">{{ owner.name }}</option>
+        </select>
+        <div *ngIf="newForm.get('ownerId')?.invalid && (newForm.get('ownerId')?.dirty || newForm.get('ownerId')?.touched)"
+          class="invalid-feedback">
+          <div *ngIf="newForm.get('ownerId')?.errors?.['required']">
+            Owner is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="petId">Pet</label>
+        <select id="petId" class="form-control" formControlName="petId">
+          <option value="">Select Pet</option>
+          <option *ngFor="let pet of pets" [value]="pet.id">{{ pet.name }}</option>
+        </select>
+        <div *ngIf="newForm.get('petId')?.invalid && (newForm.get('petId')?.dirty || newForm.get('petId')?.touched)"
+          class="invalid-feedback">
+          <div *ngIf="newForm.get('petId')?.errors?.['required']">
+            Pet is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="date">Appointment Date and Time</label>
+        <input type="datetime-local" id="date" class="form-control" formControlName="date">
+        <div *ngIf="newForm.get('date')?.invalid && (newForm.get('date')?.dirty || newForm.get('date')?.touched)"
+          class="invalid-feedback">
+          <div *ngIf="newForm.get('date')?.errors?.['required']">
+            Date is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="reason">Reason</label>
+        <textarea id="reason" class="form-control" formControlName="reason" rows="4"></textarea>
+        <div *ngIf="newForm.get('reason')?.invalid && (newForm.get('reason')?.dirty || newForm.get('reason')?.touched)"
+          class="invalid-feedback">
+          <div *ngIf="newForm.get('reason')?.errors?.['required']">
+            Reason is required.
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mr-2" [disabled]="newForm.invalid">Save</button>
+      <a routerLink="/appointments" class="btn btn-outline-secondary">Cancel</a>
+    </form>
+  </div>
+  

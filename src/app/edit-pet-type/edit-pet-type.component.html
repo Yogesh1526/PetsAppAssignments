@@ -1,0 +1,19 @@
+<div class="container">
+    <h2>Edit Pet Type</h2>
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name">
+        <div *ngIf="editForm.get('name')?.invalid && (editForm.get('name')?.dirty || editForm.get('name')?.touched)" class="invalid-feedback">
+          <div *ngIf="editForm.get('name')?.errors?.['required']">
+            Name is required.
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mr-2" [disabled]="editForm.invalid">Save</button>
+      <a routerLink="/pet-types" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left mr-1"></i> Back to Pet Types
+      </a>
+    </form>
+  </div>
+  

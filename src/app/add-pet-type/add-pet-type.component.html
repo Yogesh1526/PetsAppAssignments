@@ -1,0 +1,17 @@
+<div class="container">
+    <h2>Add New Pet Type</h2>
+    <form [formGroup]="newForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name">
+        <div *ngIf="newForm.get('name')?.invalid && (newForm.get('name')?.dirty || newForm.get('name')?.touched)" class="invalid-feedback">
+          <div *ngIf="newForm.get('name')?.errors?.['required']">
+            Name is required.
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mr-2" [disabled]="newForm.invalid">Save</button>
+      <a routerLink="/pet-types" class="btn btn-outline-secondary">Cancel</a>
+    </form>
+  </div>
+  

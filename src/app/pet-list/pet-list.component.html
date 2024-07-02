@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <h2>Pets List</h2>
+    </div>
+  </div>
+
+  <div class="row mb-3 align-items-center">
+    <div class="col-md-6">
+      <input type="text" class="form-control" placeholder="Search pets..." [(ngModel)]="searchTerm" (ngModelChange)="filterPets()">
+    </div>
+    <div class="col-md-6 text-right">
+      <button class="btn btn-primary mr-2" (click)="goToNewPet()">New Pet</button>
+      <a routerLink="/appointments" class="btn btn-secondary">Back to Appointment</a>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Breed</th>
+          <th>Owner</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pet of filteredPets">
+          <td>{{ pet.name }}</td>
+          <td>{{ pet.petType.name }}</td>
+          <td>{{ pet.petBreed.name }}</td>
+          <td>{{ pet.petOwner.name }}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Pet Actions">
+              <button class="btn btn-sm btn-primary" (click)="editPet(pet.id)">Edit</button>
+              <button class="btn btn-sm btn-danger ml-2" (click)="deletePet(pet.id)">Delete</button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="filteredPets.length === 0">
+          <td colspan="5" class="text-center">No pets found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

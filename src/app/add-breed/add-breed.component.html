@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Add New Breed</h2>
+  <form [formGroup]="newForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="petTypeId">Pet Type</label>
+      <select id="petTypeId" class="form-control" formControlName="petTypeId">
+        <option *ngFor="let petType of petTypes" [value]="petType.id">{{ petType.name }}</option>
+      </select>
+      <div *ngIf="newForm.get('petTypeId')?.invalid && (newForm.get('petTypeId')?.dirty || newForm.get('petTypeId')?.touched)" class="invalid-feedback">
+        <div *ngIf="newForm.get('petTypeId')?.errors?.['required']">
+          Pet Type is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" class="form-control" formControlName="name">
+      <div *ngIf="newForm.get('name')?.invalid && (newForm.get('name')?.dirty || newForm.get('name')?.touched)" class="invalid-feedback">
+        <div *ngIf="newForm.get('name')?.errors?.['required']">
+          Name is required.
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mr-2" [disabled]="newForm.invalid">Save</button>
+    <a routerLink="/breeds" class="btn btn-outline-secondary">Cancel</a>
+  </form>
+</div>
